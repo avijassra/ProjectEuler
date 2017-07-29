@@ -20,8 +20,7 @@
             }
             stopWatch.Stop();
 
-            Console.WriteLine("Total {0} (time: {1}ms)", sum, stopWatch.Elapsed.TotalMilliseconds);
-            
+            Console.WriteLine("Total {0} (time: {1}ms)", sum, stopWatch.Elapsed.TotalMilliseconds); 
         }
     }
 }
