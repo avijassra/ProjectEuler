@@ -11,6 +11,7 @@ let main argv =
         |> Seq.toList
         |> Seq.filter (fun x-> x%2 = 0)
         |> Seq.sum
+        //|> Seq.iter (printfn "%d, ")
         |> printfn "Total %d"
 
     stopwatch.Stop()
