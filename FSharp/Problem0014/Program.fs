@@ -6,18 +6,16 @@ open System
 let main argv =
     let stopwatch = System.Diagnostics.Stopwatch.StartNew()
     
-    let collatzSeqGenerator n: int = 
-        match n with
-            | n when n = 1 -> None
-            | n when n%2 = 0 -> (n/2)
-            | _ -> (3n+1)
+    let collatzSeqGenerator (num: int) = 
+        match num with
+            | num when num%2 = 0 -> (num/2)
+            | _ -> ((3*num)+1)
 
-    let collatzSeq =  Seq.unfold (fun x -> Some(collatzSeqGenerator n, (collatzSeqGenerator n))) (13)
+    Seq.unfold (fun x -> Some(collatzSeqGenerator x, (collatzSeqGenerator x))) (13)
+        |> Seq.takeWhile (fun x -> x > 1)
+        |> Seq.toList
+        |> Seq.iter (printfn "%d, ")
 
-    collatzSeq
-     |> Seq.iter (printfn "%d, ")
-
-    
     stopwatch.Stop()
 
     //printfn "Largest Prime Factor: %d (time: %fms)" largestPrimeFactor stopwatch.Elapsed.TotalMilliseconds
