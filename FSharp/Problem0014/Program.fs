@@ -14,7 +14,8 @@ let main argv =
     Seq.unfold (fun x -> Some(collatzSeqGenerator x, (collatzSeqGenerator x))) (13)
         |> Seq.takeWhile (fun x -> x > 1)
         |> Seq.toList
-        |> Seq.iter (printfn "%d, ")
+        |> Seq.length 
+        |> printfn "%d"
 
     stopwatch.Stop()
 
