@@ -11,11 +11,17 @@ let main argv =
             | num when num%2 = 0 -> (num/2)
             | _ -> ((3*num)+1)
 
-    Seq.unfold (fun x -> Some(collatzSeqGenerator x, (collatzSeqGenerator x))) (13)
-        |> Seq.takeWhile (fun x -> x > 1)
-        |> Seq.toList
-        |> Seq.length 
-        |> printfn "%d"
+    let largetCollatzSeqStartingNumber num = 
+        Seq.unfold (fun x -> Some(x, (collatzSeqGenerator x))) (num)
+            |> Seq.takeWhile (fun x -> x > 1)
+            |> Seq.append [1]
+            |> Seq.toList
+            |> Seq.length
+
+    seq { 0 .. 100 }
+        |> Seq.map (fun x -> KeyValue x, largetCollatzSeqStartingNumber)
+        |> Seq iter (printfn "%A" )        
+        
 
     stopwatch.Stop()
 
