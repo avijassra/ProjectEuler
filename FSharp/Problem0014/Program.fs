@@ -6,24 +6,24 @@ open System
 let main argv =
     let stopwatch = System.Diagnostics.Stopwatch.StartNew()
     
-    let collatzSeqGenerator (num: int) = 
+    let collatzSeqGenerator (num: int64) = 
+        //printfn "%d" num
         match num with
-            | num when num%2 = 0 -> (num/2)
-            | _ -> ((3*num)+1)
+            | num when num%2L = 0L -> (num/2L)
+            | _ -> ((3L*num)+1L)
 
     let largetCollatzSeqStartingNumber num = 
         Seq.unfold (fun x -> Some(x, (collatzSeqGenerator x))) (num)
-            |> Seq.takeWhile (fun x -> x > 1)
-            |> Seq.append [1]
+            |> Seq.takeWhile (fun x -> x > 1L)
+            |> Seq.append [1L]
             |> Seq.toList
             |> Seq.length
 
-    seq { 0 .. 100 }
-        |> Seq.map (fun x -> KeyValue x, largetCollatzSeqStartingNumber)
-        |> Seq iter (printfn "%A" )        
-        
+    let (cl, num) = seq { 0L .. 1000000L }
+                    |> Seq.map (fun x -> (largetCollatzSeqStartingNumber x, x)) 
+                    |> Seq.max
 
     stopwatch.Stop()
 
-    //printfn "Largest Prime Factor: %d (time: %fms)" largestPrimeFactor stopwatch.Elapsed.TotalMilliseconds
+    printfn "Largest Collatz chain is of %d for mnumber starting with: %d (time: %fms)" cl num stopwatch.Elapsed.TotalMilliseconds
     0 // return an integer exit code
