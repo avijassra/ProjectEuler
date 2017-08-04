@@ -14,14 +14,13 @@ namespace Problem0015
 
         }
 
-        public int GenerateAllRouteOptionsInGrid(int gridLimit) {
-            if()
+        public int MoveX(int x) {
+            return x+1;
+        }
 
-            return 0;
+        public int MoveX(int x) {
+            return x+1;
         }
-        
-        public int[,] FindNewRouteOptionsInGrid(List<Tuple<int, int>> gridRoute) {
-            return null;
-        }
+
     }
 }
