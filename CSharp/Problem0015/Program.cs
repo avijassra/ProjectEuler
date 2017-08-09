@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     class Program
     {
@@ -10,15 +11,22 @@
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var gridLimit = 3;
 
-            var roteOptions = new List<List<Tuple<int, int>>>();
+            var routeOptions = new List<List<Tuple<int, int>>>();
             var startPoint = new List<Tuple<int, int>>() {
                 new Tuple<int, int> (0,0)
             };
 
-            for(var ind = 0; ind < gridLimit; ind++) {
-        
+            routeOptions.Add(startPoint);
 
-                roteOptions.Add(startPoint.MoveOnX());
+            for(var ind = 0; ind < gridLimit; ind++) {
+                var copyOfRouteOptions = routeOptions.Select(x => x).ToList();
+                
+                foreach(var opt in routeOptions) {
+                    var optX = opt.MoveOnX();
+                    var optY = opt.MoveOnY();
+                }
+
+                
             }
 
 
