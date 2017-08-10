@@ -19,23 +19,33 @@
 
             routeOptions.Add(startPoint);
 
-            while(allOptionsNotExplored) {
+            while(allOptionsNotExplored)
+            {
                 var copyOfRouteOptions = routeOptions.Select(x => x).ToList();
                 routeOptions = new List<List<Tuple<int, int>>>();
-                
-                foreach(var opt in copyOfRouteOptions) {
+
+                foreach (var opt in copyOfRouteOptions)
+                {
                     var newMoveOnX = opt.MoveOnX(gridLimit);
-                    routeOptions.Add(newMoveOnX);
+                    if(null != newMoveOnX) {
+                        routeOptions.Add(newMoveOnX);
+                    }
+                    
                     var newMoveOnY = opt.MoveOnY(gridLimit);
-                    routeOptions.Add(newMoveOnY);
+                    if(null != newMoveOnY) {
+                        routeOptions.Add(newMoveOnY);
+                    }
 
-                    var xLastPoint = newMoveOnX.Last();
-                    var yLastPoint = newMoveOnY.Last();
+                    var xLastPoint = newMoveOnX?.Last();
+                    var yLastPoint = newMoveOnY?.Last();
 
-                    allOptionsNotExplored = xLastPoint.Item1 < gridLimit || 
-                                                xLastPoint.Item2 < gridLimit || 
-                                                yLastPoint.Item1 < gridLimit || 
-                                                yLastPoint.Item2 < gridLimit;
+                    
+                    
+                    
+                    allOptionsNotExplored = xLastPoint?.Item1 < gridLimit ||
+                                                xLastPoint?.Item2 < gridLimit ||
+                                                yLastPoint?.Item1 < gridLimit ||
+                                                yLastPoint?.Item2 < gridLimit;
                     Console.WriteLine($"allOptionsNotExplored: {allOptionsNotExplored}");
 
                     Console.WriteLine(string.Join(" -> ", newMoveOnX.Select(x => string.Format($"({x.Item1}, {x.Item2})"))));
@@ -43,7 +53,7 @@
                 }
             }
 
-            foreach(var opt in routeOptions) {
+            foreach (var opt in routeOptions) {
                 Console.WriteLine(string.Join(" -> ", opt.Select(x => string.Format($"({x.Item1}, {x.Item2})"))));
             }
 

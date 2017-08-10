@@ -12,9 +12,10 @@ namespace System.Collections.Generic
 
             if(lastPoint.Item1 < maxX) {
                 newRouteOption.Add(new Tuple<int, int>(lastPoint.Item1 + 1, lastPoint.Item2));
+                return newRouteOption;
             }
             
-            return newRouteOption;
+            return null;
         }
 
         public static List<Tuple<int, int>> MoveOnY(this List<Tuple<int, int>> routeOption, int maxY) 
@@ -24,9 +25,10 @@ namespace System.Collections.Generic
 
             if(lastPoint.Item2 < maxY) {
                 newRouteOption.Add(new Tuple<int, int>(lastPoint.Item1, lastPoint.Item2 + 1));
+                return newRouteOption;
             }
             
-            return newRouteOption;
+            return null;
         }
     }
 }
