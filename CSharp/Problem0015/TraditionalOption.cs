@@ -6,7 +6,7 @@ namespace Problem0015
 
     class ProgramBckup
     {
-        static void Main(string[] args)
+        static void Main_bkup(string[] args)
         {
             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var gridSize = 14;
