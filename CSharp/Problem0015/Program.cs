@@ -26,7 +26,7 @@
 
             stopwatch.Stop();
 
-            Console.WriteLine($"Total options: {grid[0,0]} (time {stopwatch.Elapsed.TotalMilliseconds}ms)");
+            Console.WriteLine($"Total options: {grid[0,0]} (time {stopwatch.ElapsedMilliseconds}ms)");
         }
     }
 }
