@@ -1,0 +1,21 @@
+{
+  "name": "Problem3",
+  "version": "0.0.1",
+  "description": "Project Euler Problem 3",
+  "scripts": {
+    "start": "tsc *.ts && node main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@types/lodash": "^4.14.71",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "typescript": "^2.3.4",
+    "@types/node": "^7.0.22"
+  },
+  "repository": {}
+}
