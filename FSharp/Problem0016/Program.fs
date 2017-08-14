@@ -10,28 +10,33 @@ open System
 
 [<EntryPoint>]
 let main argv =
-    let raiseToPwr = 5
-    let numWithRaiseToPwr = 2
+    let stopwatch = System.Diagnostics.Stopwatch.StartNew()
+    let raiseToPwr = 1000
+    let numWithRaiseToPwr = 2I
     
     let resolveRaiseToPwr =
-        let rec resolve limit currentPwr num =
-            match num with
-                | currentPwr when limit < 1 -> printfn "num: %d" num; num
-                | currentPwr when currentPwr*2 > raiseToPwr -> printfn "1. limit: %d | pwr: %d | num: %d" (limit-currentPwr) 1 numWithRaiseToPwr; num * (resolve (limit-currentPwr) 1 numWithRaiseToPwr) 
-                | _ -> printfn "2. limit: %d | pwr: %d | num: %d" limit (currentPwr*2) (num*num); resolve limit (currentPwr*2) (num*num)
+        let rec resolve limit currentPwr (num: bigint) : bigint =
+            //printfn "limit: %d | currentPwr: %d | num: %A" limit currentPwr num
+            match limit with
+                | 0 -> 1I
+                | limit when limit <= 1 -> num
+                | limit when limit < (currentPwr*2) -> num * (resolve (limit-currentPwr) 1 numWithRaiseToPwr) 
+                | _ -> resolve limit (currentPwr*2) (num*num)
 
         resolve raiseToPwr 1 numWithRaiseToPwr
     
-    // let sumOfDig num: int64 =
-    //     let rec loopDigs sum = function
-    //          |  num when num > 0L -> loopDigs  (sum + (num%10L)) (num/10L)
-    //          | _ -> sum
+    let sumOfDig (num:bigint) =
+        let rec loopDigs sum = function
+             |  num when num > 0I -> loopDigs  (sum + (num%10I)) (num/10I)
+             | _ -> sum
 
-    //     loopDigs 0L num
+        loopDigs 0I num
 
     let digSum = resolveRaiseToPwr
-                //|> sumOfDig
+                    |> sumOfDig
 
-    printfn "Hello World from F#! %A" digSum
+    stopwatch.Stop()
+
+    printfn "Power digit sum: %A (time: %dms)" digSum stopwatch.ElapsedMilliseconds
 
     0 // return an integer exit code
